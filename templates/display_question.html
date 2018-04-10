@@ -93,9 +93,11 @@
                     <td>{% if field['accepted'] == none %} Accepted {% else %} Not Accepted {% endif %}</td>
                     {% set question_id = question_id|int %}
                     {% set answer_id = field['id']|int %}
+                    {% set accepted = field['accepted'] %}
                     {% set vote_up='/question/' + question_id|string + "/" + answer_id|string + "/vote-up" %}
                     {% set vote_down='/question/' + question_id|string + "/" + answer_id|string + "/vote-down" %}
                     {% set post_answer_comment_link = '/question/' + question_id|string + "/answer/" + answer_id|string + "/new-comment" %}
+                    {% set accept_answer_link = '/question/' + question_id|string + "/answer/" + answer_id|string + "/accept" %}
                     <td><a href={{ vote_up }}><img alt="Like" src='/static/like.png' height='20'></a></td>
                     <td><a href={{ vote_down }}><img alt="Dislike" src='/static/dislike.png' height='20' width='30'></a>
                     </td>
@@ -104,6 +106,16 @@
                               id="New answer comment">
                             <input type="submit" value="Add comment to answer" , id="submit_1">
                         </form>
+                    </td>
+                    <td>
+                        {% if accepted %}
+                            Answer is accepted!
+                        {% else %}
+                            <form action={{ accept_answer_link }} method='post' name="Accept answer"
+                                  id="Accept Answer">
+                                <input type="submit" value="Accept Answer" , id="accept">
+                            </form>
+                        {% endif %}
                     </td>
                 </tr>
             </table>
