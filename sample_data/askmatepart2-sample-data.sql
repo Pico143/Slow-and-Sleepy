@@ -124,8 +124,8 @@ ALTER TABLE ONLY comment
 ALTER TABLE ONLY question_tag
     ADD CONSTRAINT fk_tag_id FOREIGN KEY (tag_id) REFERENCES tag(id) ON DELETE CASCADE;
 
-INSERT INTO user_table VALUES (0, 'Stiepan', '2016-04-28 08:29:00', 0);
-INSERT INTO user_table VALUES (1, 'Bimbo Bagins', '2017-03-20 06:29:00', 15);
+INSERT INTO user_table (username, registration_time, accepted) VALUES ('Stiepan', '2016-04-28 08:29:00', 0);
+INSERT INTO user_table (username, registration_time, accepted) VALUES ('Bimbo Bagins', '2017-03-20 06:29:00', 15);
 
 
 INSERT INTO question VALUES (0, '2017-04-28 08:29:00', 29, 7, 0, 'How to make lists in Python?', 'I am totally new to this, any hints?', NULL);
