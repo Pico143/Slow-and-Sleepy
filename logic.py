@@ -126,3 +126,6 @@ def vote_answer(answer_id, vote):
 def register_user(name):
     values = [name, str(datetime.now().replace(microsecond=0))]
     persistence.add_user_to_db(values)
+
+def show_the_users():
+    return persistence.show_all_users()
