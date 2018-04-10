@@ -121,3 +121,4 @@ def vote_answer(answer_id, vote):
                 answer['vote_number'] = int(answer['vote_number']) - 1
             persistence.update_answer_vote(answer)
             break
+

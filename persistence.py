@@ -173,3 +173,9 @@ def edit_comment(user_comment):
     values.append(ID)
     cursor.execute(query, values)
     connection.close()
+
+@connection.handler
+def add_user_to_db(name):
+    query = """INSERT INTO user_table (username, registration_time) VALUES %s, %s  """
+    values = [name, str(datetime.now().replace(microsecond=0))]
+    cursor.execute (query, values)
