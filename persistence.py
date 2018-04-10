@@ -182,7 +182,7 @@ def add_user_to_db(cursor, values):
 
 
 @connection_handler
-def show_all_users():
+def show_all_users(cursor):
     cursor.execute("""SELECT username FROM user_table;""")
     users = cursor.fetchall()
     return users

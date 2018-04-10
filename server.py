@@ -73,7 +73,9 @@ def edit_comment(comment_id=None):
 @app.route('/question/<int:question_id>/new-answer')
 def write_answer(question_id=None):
     questions = persistence.get_item_by_id("question", question_id)
-    return render_template('post_answer.html', questions=questions, question_id=question_id)
+    user_list = logic.show_the_users()
+    return render_template('post_answer.html', questions=questions,
+                           question_id=question_id, user_list=user_list)
 
 
 @app.route('/question/<int:question_id>/new-answer', methods=['POST'])
