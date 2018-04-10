@@ -25,11 +25,12 @@
     </table>
     <br>
     {% if labels_question_comment == [] %}
-        <p>This question has no comments yet. Be the first Chap!</p>
+        <p>This question has no comments yet.</p>
     {% else %}
+        <h1> Comments: </h1>
         <table class="table">
             <tr>
-                <th>Comments:</th>
+                <th>Comment:</th>
                 <th>Submission time:</th>
                 <th>Edited count:</th>
                 <th>Edit:</th>
@@ -75,16 +76,21 @@
         <p>This question has no answers yet. Be the first Mate!</p>
     {% else %}
         {% for field in questions_answer %}
+            <h1> Answers: </h1>
             <table class="table">
                 <tr>
-                    {% for item in labels_answer|sort %}
-                        <th>{{ item }}</th>
-                    {% endfor %}
+                    <th>Answer</th>
+                    <th>Submission time</th>
+                    <th>Votes</th>
+                    <th>Accepted</th>
+                    <th>Vote Up</th>
+                    <th>Vote Down</th>
                 </tr>
                 <tr>
-                    {% for key, value in field.items()|sort %}
-                        <td> {{ value }} </td>
-                    {% endfor %}
+                    <td>{{ field['message'] }}</td>
+                    <td>{{ field['submission_time'] }}</td>
+                    <td>{{ field['vote_number'] }}</td>
+                    <td>{% if field['accepted'] == none %} Accepted {% else %} Not Accepted {% endif %}</td>
                     {% set question_id = question_id|int %}
                     {% set answer_id = field['id']|int %}
                     {% set accepted = field['accepted'] %}
@@ -112,32 +118,35 @@
                         {% endif %}
                     </td>
                 </tr>
-                {% for comment in answer_comment %}
-                    {% set _id = comment['id']|int %}
-                    {% set comment_id = comment['answer_id']|int %}
-                    {% if comment_id == answer_id %}
-                        {% set delete_link = "/comments/" + _id|string + "/delete" %}
-                        <tr>
-                            <th>Comment:</th>
-                            <th>Submission time:</th>
-                            <th>Delete:</th>
-                        </tr>
-                        <tr>
-                            <td>
-                                {{ comment['message'] }}
-                            </td>
-                            <td>
-                                {{ comment['submission_time'] }}
-                            </td>
-                            <td>
-                                <a href={{ delete_link }}>
-                                    <span class="glyphicon glyphicon-trash"></span>
-                                </a>
-                            </td>
-                        </tr>
-                    {% endif %}
-                {% endfor %}
             </table>
+            <h2>Comments to answer</h2>
+            {% for comment in answer_comment %}
+                <table class="table">
+                {% set _id = comment['id']|int %}
+                {% set comment_id = comment['answer_id']|int %}
+                {% if comment_id == answer_id %}
+                    {% set delete_link = "/comments/" + _id|string + "/delete" %}
+                    <tr>
+                        <th>Comment:</th>
+                        <th>Submission time:</th>
+                        <th>Delete:</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            {{ comment['message'] }}
+                        </td>
+                        <td>
+                            {{ comment['submission_time'] }}
+                        </td>
+                        <td>
+                            <a href={{ delete_link }}>
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </a>
+                        </td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </table>
         {% endfor %}
     {% endif %}
     <div>

@@ -2,10 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fb9a0db0-940e-4ed2-a32e-9dede0acf09e" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/Slow-and-Sleepy.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/persistence.py" beforeDir="false" afterPath="$PROJECT_DIR$/persistence.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/server.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/User_info.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/User_info.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/display_question.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/display_question.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/registration.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registration.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -19,8 +21,17 @@
       <file leaf-file-name="server.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/server.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="18">
-              <caret line="68" column="50" selection-start-line="68" selection-start-column="50" selection-end-line="68" selection-end-column="50" />
+            <state relative-caret-position="125">
+              <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Slow-and-Sleepy.iml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/.idea/Slow-and-Sleepy.iml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="23" lean-forward="true" selection-start-column="23" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -37,8 +48,8 @@
       <file leaf-file-name="persistence.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/persistence.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3258">
-              <caret line="184" selection-start-line="184" selection-end-line="184" />
+            <state relative-caret-position="92">
+              <caret line="186" column="19" lean-forward="true" selection-start-line="186" selection-start-column="19" selection-end-line="186" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -46,8 +57,8 @@
       <file leaf-file-name="display_question.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/display_question.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1602">
-              <caret line="89" column="55" selection-start-line="89" selection-start-column="55" selection-end-line="89" selection-end-column="55" />
+            <state relative-caret-position="124">
+              <caret line="76" column="14" lean-forward="true" selection-start-line="76" selection-start-column="14" selection-end-line="76" selection-end-column="14" />
             </state>
           </provider>
         </entry>
@@ -63,9 +74,9 @@
         <option value="$PROJECT_DIR$/sample_data/askmatepart2-sample-data.sql" />
         <option value="$PROJECT_DIR$/database.ini" />
         <option value="$PROJECT_DIR$/server.py" />
-        <option value="$PROJECT_DIR$/persistence.py" />
         <option value="$PROJECT_DIR$/logic.py" />
         <option value="$PROJECT_DIR$/templates/display_question.html" />
+        <option value="$PROJECT_DIR$/persistence.py" />
       </list>
     </option>
   </component>
@@ -87,6 +98,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -112,7 +124,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -177,21 +188,22 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="52" y="-4" width="1315" height="773" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5003808" side_tool="true" weight="0.3298193" />
+      <window_info active="true" anchor="bottom" id="Event Log" order="7" sideWeight="0.50114244" side_tool="true" visible="true" weight="0.32831326" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.4996192" visible="true" weight="0.3298193" />
+      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.4988576" visible="true" weight="0.32831326" />
       <window_info anchor="bottom" id="Python Console" order="7" />
+      <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2498096" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2498096" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="right" id="SciView" order="3" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
@@ -212,6 +224,34 @@
     <option name="LAST_COMMIT_MESSAGE" value="Add accept answer functionality" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/server.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1152">
+          <caret line="68" column="50" selection-start-line="68" selection-start-column="50" selection-end-line="68" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/logic.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2268">
+          <caret line="128" selection-start-line="128" selection-end-line="128" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/persistence.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3258">
+          <caret line="184" selection-start-line="184" selection-end-line="184" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/display_question.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1602">
+          <caret line="89" column="55" selection-start-line="89" selection-start-column="55" selection-end-line="89" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/server.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1152">
@@ -296,13 +336,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/persistence.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3258">
-          <caret line="184" selection-start-line="184" selection-end-line="184" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/logic.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2268">
@@ -310,17 +343,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/Slow-and-Sleepy.iml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="23" lean-forward="true" selection-start-column="23" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/persistence.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="92">
+          <caret line="186" column="19" lean-forward="true" selection-start-line="186" selection-start-column="19" selection-end-line="186" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/templates/display_question.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1602">
-          <caret line="89" column="55" selection-start-line="89" selection-start-column="55" selection-end-line="89" selection-end-column="55" />
+        <state relative-caret-position="124">
+          <caret line="76" column="14" lean-forward="true" selection-start-line="76" selection-start-column="14" selection-end-line="76" selection-end-column="14" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/server.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="68" column="50" selection-start-line="68" selection-start-column="50" selection-end-line="68" selection-end-column="50" />
+        <state relative-caret-position="125">
+          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
         </state>
       </provider>
     </entry>

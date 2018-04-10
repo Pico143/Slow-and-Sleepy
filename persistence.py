@@ -185,6 +185,13 @@ def accept_answer(cursor, answer_id):
 
 
 @connection_handler
-def add_user_to_db(values):
-    query = """INSERT INTO user_table (username, registration_time) VALUES %s, %s  """
-    cursor.execute (query, values)
+def add_user_to_db(cursor, values):
+    query = """INSERT INTO user_table (username, registration_time) VALUES (%s, %s);"""
+    cursor.execute(query, values)
+
+
+@connection_handler
+def show_all_users():
+    cursor.execute("""SELECT username FROM user_table;""")
+    users = cursor.fetchall()
+    return users
