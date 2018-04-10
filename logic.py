@@ -121,3 +121,7 @@ def vote_answer(answer_id, vote):
                 answer['vote_number'] = int(answer['vote_number']) - 1
             persistence.update_answer_vote(answer)
             break
+
+def register_user(name):
+    values = [name, str(datetime.now().replace(microsecond=0))]
+    persistence.add_user_to_db(values)
