@@ -156,9 +156,9 @@ def search():
 
 @app.route('/registration', methods=["POST", "GET"])
 def registration_user():
-    if request.method="GET":
+    if request.method=="GET":
         return render_template("registration.html")
-    elif request.method="POST":
+    elif request.method=="POST":
         name = request.form('username')
         logic.register_user(name)
         return redirect('/')

@@ -174,7 +174,7 @@ def edit_comment(user_comment):
     cursor.execute(query, values)
     connection.close()
 
-@connection.handler
+@connection_handler
 def add_user_to_db(values):
     query = """INSERT INTO user_table (username, registration_time) VALUES %s, %s  """
     cursor.execute (query, values)
