@@ -154,14 +154,14 @@ def search():
         return render_template('search_failed.html', term=request.form['query'])
 
 
-@app.route('/registration')
-def registration():
-    return render_template('registration.html')
-
-
 @app.route('/registration', methods=["POST", "GET"])
 def registration_user():
-    return redirect('/')
+    if request.method="GET":
+        return render_template("registration.html")
+    elif request.method="POST":
+        name = request.form('username')
+        logic.register_user(name)
+        return redirect('/')
 
 
 if __name__ == '__main__':
