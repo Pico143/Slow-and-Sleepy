@@ -70,6 +70,12 @@ def edit_comment(comment_id=None):
         return redirect('/question/' + str(question_id))
 
 
+@app.route('/question/<int:question_id>/answer/<int:answer_id>/accept', methods=["POST"])
+def accept_answer(question_id=None, answer_id=None):
+    persistence.accept_answer(answer_id)
+    return redirect('/question/' + str(question_id))
+
+
 @app.route('/question/<int:question_id>/new-answer')
 def write_answer(question_id=None):
     questions = persistence.get_item_by_id("question", question_id)

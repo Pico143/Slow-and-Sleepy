@@ -174,6 +174,16 @@ def edit_comment(user_comment):
     cursor.execute(query, values)
     connection.close()
 
+
+@connection_handler
+def accept_answer(cursor, answer_id):
+    cursor.execute("""
+                        UPDATE answer
+                        SET accepted = True
+                        WHERE id = {0};
+                       """.format(answer_id))
+
+
 @connection_handler
 def add_user_to_db(values):
     query = """INSERT INTO user_table (username, registration_time) VALUES %s, %s  """
