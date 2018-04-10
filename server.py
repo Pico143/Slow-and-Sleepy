@@ -25,6 +25,13 @@ def new_question():
     return render_template('ask_question.html')
 
 
+@app.route('/new-question', methods=["POST"])
+def submit_question():
+    dict = logic.question_dict(request.form["title"], request.form["question"])
+    persistence.add_row_to_db(dict, "question")
+    return redirect('/list')
+
+
 @app.route('/question/<int:question_id>/new-comment', methods=["GET", "POST"])
 def new_question_comment(question_id=None):
     if request.method == "GET":
@@ -61,13 +68,6 @@ def edit_comment(comment_id=None):
         question_comment[0]['message'] = request.form["comment"]
         persistence.edit_comment(question_comment)
         return redirect('/question/' + str(question_id))
-
-
-@app.route('/new-question', methods=["POST"])
-def submit_question():
-    dict = logic.question_dict(request.form["title"], request.form["question"])
-    persistence.add_row_to_db(dict, "question")
-    return redirect('/list')
 
 
 @app.route('/question/<int:question_id>/new-answer')
@@ -152,6 +152,16 @@ def search():
         return render_template('list_questions.html', questions=questions, labels=labels, search=True)
     else:
         return render_template('search_failed.html', term=request.form['query'])
+
+
+@app.route('/registration')
+def registration():
+    return render_template('registration.html')
+
+
+@app.route('/registration', methods=["POST", "GET"])
+def registration_user():
+    return redirect('/')
 
 
 if __name__ == '__main__':
