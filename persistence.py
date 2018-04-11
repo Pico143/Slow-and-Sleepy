@@ -24,7 +24,7 @@ def connection_handler(function):
 @connection_handler
 def search(cursor, query):
     cursor.execute("""
-                    SELECT question.view_number, question.vote_number,  DISTINCT(question.id), question.submission_time, question.title, question.message FROM question
+                    SELECT DISTINCT question.view_number, question.vote_number, question.id, question.submission_time, question.title, question.message FROM question
       LEFT JOIN answer ON answer.question_id = question.id
     WHERE LOWER(question.title) LIKE LOWER('%{0}%') OR LOWER(answer.message) LIKE LOWER('%{0}%');
     """.format(query['query'].replace("'", "''")))
