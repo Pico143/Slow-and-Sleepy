@@ -127,5 +127,13 @@ def register_user(name):
     values = [name, str(datetime.now().replace(microsecond=0))]
     persistence.add_user_to_db(values)
 
+
 def show_the_users():
     return persistence.show_all_users()
+
+
+def get_all_questions_answers_comments(userID):
+    questions = persistence.get_all_users_questions(userID)
+    answers = persistence.get_all_users_answers(userID)
+    comments = persistence.get_all_users_comments(userID)
+    return questions, answers, comments

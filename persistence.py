@@ -195,3 +195,36 @@ def show_all_users(cursor):
     cursor.execute("""SELECT username FROM user_table;""")
     users = cursor.fetchall()
     return users
+
+
+@connection_handler
+def get_all_users_questions(cursor, userID):
+    ''' User ID: Integer
+    Return value:
+    Questions - list of dictionaries with given users questions'''
+
+    query = """SELECT * FROM questions WHERE userID = %s"""
+    cursor.execute(query, userID)
+    return cursor.fetchall()
+
+
+@connection_handler
+def get_all_users_answers(cursor, userID):
+    ''' User ID: Integer
+    Return value:
+    Answers - list of dictionaries with given users answers'''
+
+    query = """SELECT * FROM answers WHERE userID = %s"""
+    cursor.execute(query, userID)
+    return cursor.fetchall()
+
+
+@connection_handler
+def get_all_users_comments(cursor, userID):
+    ''' User ID: Integer
+        Return value:
+        Comments - list of dictionaries with given users comments'''
+
+    query = """SELECT * FROM comments WHERE userID = %s"""
+    cursor.execute(query, userID)
+    return cursor.fetchall()

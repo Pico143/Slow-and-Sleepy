@@ -172,6 +172,15 @@ def user_registration():
         return redirect('/')
 
 
+@app.route('/user/<user_id>')
+def show_user(user_id=None):
+    questions, answers, comments = logic.get_all_questions_answers_comments(user_id)
+    return render_template('User_info.html',
+                           questions=questions,
+                           answers=answers,
+                           comments=comments)
+
+
 if __name__ == '__main__':
     app.secret_key = 'some_key'
     app.run(
