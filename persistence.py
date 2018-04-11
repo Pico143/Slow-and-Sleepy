@@ -205,5 +205,84 @@ def add_user_to_db(cursor, values):
 @connection_handler
 def show_all_users(cursor):
     cursor.execute("""SELECT username FROM user_table;""")
-    users = cursor.fetchall()
-    return users
+    return cursor.fetchall()
+
+
+@connection_handler
+def get_all_users_questions(cursor, userID):
+    ''' User ID: Integer
+    Return value:
+    Questions - list of dictionaries with given users questions'''
+
+    query = """SELECT * FROM question WHERE question.user_id = %s;"""
+    cursor.execute(query, [userID])
+    return cursor.fetchall()
+
+
+@connection_handler
+def get_all_users_answers(cursor, userID):
+    ''' User ID: Integer
+    Return value:
+    Answers - list of dictionaries with given users answers and question message'''
+
+    query = """SELECT answer.*, question.message AS question FROM answer
+               INNER JOIN question ON question.id=answer.question_id 
+               WHERE answer.user_id = %s;"""
+    cursor.execute(query, [userID])
+    return cursor.fetchall()
+
+
+@connection_handler
+def get_all_users_comments(cursor, userID):
+    ''' User ID: Integer
+        Return value:
+        Comments - list of dictionaries with given users comments and relevant question message'''
+
+    query = """SELECT comment.*, question.message AS question FROM comment 
+               INNER JOIN question ON question.id=comment.question_id
+               WHERE comment.user_id = %s"""
+    cursor.execute(query, [userID])
+    return cursor.fetchall()
+
+
+@connection_handler
+def get_user(cursor, userID):
+    query = """SELECT * FROM user_table WHERE user_table.id = %s"""
+    cursor.execute(query, [userID])
+    return cursor.fetchall()
+
+
+@connection_handler
+def get_all_questions_and_users(cursor):
+    cursor.execute("""
+                    SELECT question.id AS question_id, user_table.id AS user_id, reputation  FROM question JOIN user_table ON question.user_id = user_table.id;
+                   """)
+    all_questions_and_users = cursor.fetchall()
+    return all_questions_and_users
+
+
+@connection_handler
+def get_all_answers_and_users(cursor):
+    cursor.execute("""
+                    SELECT answer.id AS answer_id, user_table.id AS user_id, reputation  FROM answer JOIN user_table ON answer.user_id = user_table.id;
+                   """)
+    all_answers_and_users = cursor.fetchall()
+    return all_answers_and_users
+
+
+@connection_handler
+def update_reputation(cursor, row):
+    """
+    :param cursor: psycopg2 cursor (provided by connection handler)
+    :param row: Dictionary with updated row
+    :return:
+    """
+    cursor.execute("""
+                    UPDATE user_table SET reputation = {0} WHERE id = {1};
+                   """.format(row['reputation'], row['user_id']))
+
+
+@connection_handler
+def view_users(cursor):
+    cursor.execute("""SELECT * FROM user_table;""")
+    return cursor.fetchall()

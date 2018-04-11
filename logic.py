@@ -90,6 +90,19 @@ def vote_question(question_id, vote):
             elif vote is False:
                 question['vote_number'] = int(question['vote_number']) - 1
             persistence.update_question_vote(question)
+            change_reputation_for_questions(question_id, vote)
+            break
+
+
+def change_reputation_for_questions(question_id, vote):
+    users_and_questions = persistence.get_all_questions_and_users()
+    for user in users_and_questions:
+        if int(user['question_id']) == int(question_id):
+            if vote is True:
+                user['reputation'] = int(user['reputation']) + 5
+            elif vote is False:
+                user['reputation'] = int(user['reputation']) - 2
+            persistence.update_reputation(user)
             break
 
 
@@ -120,6 +133,19 @@ def vote_answer(answer_id, vote):
             elif vote is False:
                 answer['vote_number'] = int(answer['vote_number']) - 1
             persistence.update_answer_vote(answer)
+            vote_reputation_for_answers(answer_id, vote)
+            break
+
+
+def vote_reputation_for_answers(answer_id, vote):
+    users_and_answers = persistence.get_all_answers_and_users()
+    for user in users_and_answers:
+        if int(user['answer_id']) == int(answer_id):
+            if vote is True:
+                user['reputation'] = int(user['reputation']) + 10
+            elif vote is False:
+                user['reputation'] = int(user['reputation']) - 2
+            persistence.update_reputation(user)
             break
 
 
@@ -127,5 +153,21 @@ def register_user(name):
     values = [name, str(datetime.now().replace(microsecond=0))]
     persistence.add_user_to_db(values)
 
+
 def show_the_users():
     return persistence.show_all_users()
+
+
+def get_all_questions_answers_comments_and_user(userID):
+    questions = persistence.get_all_users_questions(userID)
+    answers = persistence.get_all_users_answers(userID)
+    comments = persistence.get_all_users_comments(userID)
+    user = persistence.get_user(userID)
+    return questions, answers, comments, user
+
+
+def get_all_users():
+    return persistence.view_users()
+
+def get_user_by_id(userID):
+    return persistence.get_user(userID)

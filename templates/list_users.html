@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+
+{% block title %}ASK MATE{% endblock %}
+
+{% block page_content %}
+
+    <table class="table">
+        <tr>
+            <th>Username</th>
+            <th>Reputation</th>
+            <th>Registration time</th>
+        </tr>
+        {% for user in users %}
+            <tr>
+                <td><a href={{ url_for('show_user', user_id=user['id']) }}>{{ user['username'] }}</td>
+                <td>{{ user['reputation'] }}</td>
+                <td>{{ user['registration_time'] }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}

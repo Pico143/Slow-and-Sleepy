@@ -5,14 +5,77 @@
 
 {% block page_content %}
     <h1> USER {{ user['username'] }} </h1>
-    <p> Registration date: {{ user['registration_date'] }} </p>
+    <p> Registration date: {{ user['registration_time'] }} </p>
     <p> Reputation: {{ user['reputation'] }} </p>
+
     <h2> USER'S QUESTIONS</h2>
-    <table border="1">
-        <tr>
-            <th>Question</th>
-            <th>Submission time</th>
-            <th>Votes</th>
-        </tr>
-    </table>
+    {% if questions == [] %}
+        <p>This user had not yet asked any questions.</p>
+    {% else %}
+        <table class="table">
+            <tr>
+                <th>Question</th>
+                <th>Submission time</th>
+                <th>Votes</th>
+            </tr>
+            {% for question in questions %}
+                <tr>
+                    <td><a href={{ url_for('view_question', question_id=question['id']) }}>{{ question['message'] }}
+                    </td>
+                    <td>{{ question['submission_time'] }}</td>
+                    <td>{{ question['vote_number'] }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+
+    <h2> USER'S COMMENTS</h2>
+    {% if comments == [] %}
+        <p>This user had not yet commented on anything yet.</p>
+    {% else %}
+        <table class="table">
+            <tr>
+                <th>Question</th>
+                <th>Comment</th>
+                <th>Submission time</th>
+                <th>Votes</th>
+            </tr>
+            {% for comment in comments %}
+                <tr>
+                    <td><a href=
+                                   {{ url_for('view_question', question_id=comment['question_id']) }}>{{ comment['question'] }}
+                                   </td>
+                    <td>{{ comment['message'] }}</td>
+                    <td>{{ comment['submission_time'] }}</td>
+                    <td>{{ comment['question_id'] }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+
+    <h2> USER'S ANSWERS</h2>
+    {% if answers == [] %}
+        <p>This user had not yet proven helpful to anyone.</p>
+    {% else %}
+        <table class="table">
+            <tr>
+                <th>Question</th>
+                <th>Answer</th>
+                <th>Submission time</th>
+                <th>Votes</th>
+            </tr>
+            {% for answer in answers %}
+                <tr>
+                    <td>
+                        <a href={{ url_for('view_question', question_id=answer['question_id']) }}> {{ answer['question'] }}</a>
+                    </td>
+                    <td>{{ answer['message'] }}</td>
+                    <td>{{ answer['submission_time'] }}</td>
+                    <td>{{ answer['vote_number'] }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+
+
 {% endblock %}

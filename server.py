@@ -117,6 +117,7 @@ def view_question(question_id=None):
     labels_answer = logic.get_list_of_headers(questions_answer)
     labels_question_comment = logic.get_list_of_headers(question_comment)
     labels_answer_comment = logic.get_list_of_headers(answer_comment)
+    user = persistence.get_user(question[0]['user_id'])
     return render_template('display_question.html',
                            question=question,
                            questions_answer=questions_answer,
@@ -126,7 +127,8 @@ def view_question(question_id=None):
                            question_comment=question_comment,
                            answer_comment=answer_comment,
                            labels_question_comment=labels_question_comment,
-                           labels_answer_comment=labels_answer_comment)
+                           labels_answer_comment=labels_answer_comment,
+                           user=user[0])
 
 
 @app.route('/question/<int:question_id>/vote-up')
@@ -172,6 +174,23 @@ def user_registration():
         name = request.form['username']
         logic.register_user(name)
         return redirect('/')
+
+
+@app.route('/user/<int:user_id>')
+def show_user(user_id=None):
+    questions, answers, comments, user = logic.get_all_questions_answers_comments_and_user(user_id)
+    return render_template('User_info.html',
+                           questions=questions,
+                           answers=answers,
+                           comments=comments,
+                           user=user[0])
+
+
+@app.route('/view_users')
+def view_users():
+    labels = util.US_FIELDS
+    users = persistence.view_users()
+    return render_template('list_users.html', labels=labels, users=users)
 
 
 if __name__ == '__main__':
