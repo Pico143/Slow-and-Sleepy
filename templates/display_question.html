@@ -11,8 +11,8 @@
             <th>Submission time</th>
             <th>User</th>
             <th>Number of votes</th>
-            <th>Vote down</th>
             <th>Vote up</th>
+            <th>Vote down</th>
         </tr>
         <tr>
             {% set question_id = question_id|int %}
@@ -36,6 +36,7 @@
             <tr>
                 <th>Comment:</th>
                 <th>Submission time:</th>
+                <th>User</th>
                 <th>Edited count:</th>
                 <th>Edit:</th>
                 <th>Delete:</th>
@@ -54,6 +55,9 @@
                         </td>
                         <td>
                             {{ submission_time }}
+                        </td>
+                        <td>
+                            <a href={{ url_for('show_user', user_id=user['id']) }}>{{ user['username'] }}
                         </td>
                         <td>
                             {% if comment['edited_count'] %} {{ comment['edited_count'] }}
@@ -86,6 +90,7 @@
                     <th>Answer</th>
                     <th>Submission time</th>
                     <th>Votes</th>
+                    <th>User</th>
                     <th>Accepted</th>
                     <th>Vote Up</th>
                     <th>Vote Down</th>
@@ -94,6 +99,7 @@
                     <td>{{ field['message'] }}</td>
                     <td>{{ field['submission_time'] }}</td>
                     <td>{{ field['vote_number'] }}</td>
+                    <td>{{ url_for('show_user', user_id=user['id']) }}></td>
                     <td>{% if field['accepted'] == none %} Accepted {% else %} Not Accepted {% endif %}</td>
                     {% set question_id = question_id|int %}
                     {% set answer_id = field['id']|int %}
