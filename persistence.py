@@ -24,7 +24,7 @@ def connection_handler(function):
 @connection_handler
 def search(cursor, query):
     cursor.execute("""
-                    SELECT question.view_number, question.vote_number, question.id, question.submission_time, question.title, question.message FROM question
+                    SELECT question.view_number, question.vote_number,  DISTINCT(question.id), question.submission_time, question.title, question.message FROM question
       LEFT JOIN answer ON answer.question_id = question.id
     WHERE LOWER(question.title) LIKE LOWER('%{0}%') OR LOWER(answer.message) LIKE LOWER('%{0}%');
     """.format(query['query'].replace("'", "''")))
@@ -226,7 +226,7 @@ def get_all_users_answers(cursor, userID):
     Answers - list of dictionaries with given users answers and question message'''
 
     query = """SELECT answer.*, question.message AS question FROM answer
-               INNER JOIN question ON question.id=answer.question_id 
+               INNER JOIN question ON question.id=answer.question_id
                WHERE answer.user_id = %s;"""
     cursor.execute(query, [userID])
     return cursor.fetchall()
@@ -238,7 +238,7 @@ def get_all_users_comments(cursor, userID):
         Return value:
         Comments - list of dictionaries with given users comments and relevant question message'''
 
-    query = """SELECT comment.*, question.message AS question FROM comment 
+    query = """SELECT comment.*, question.message AS question FROM comment
                INNER JOIN question ON question.id=comment.question_id
                WHERE comment.user_id = %s"""
     cursor.execute(query, [userID])

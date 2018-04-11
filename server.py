@@ -75,6 +75,7 @@ def edit_comment(comment_id=None):
 @app.route('/question/<int:question_id>/answer/<int:answer_id>/accept', methods=["POST"])
 def accept_answer(question_id=None, answer_id=None):
     persistence.accept_answer(answer_id)
+    logic.vote_reputation_for_accepted_answer(answer_id)
     return redirect('/question/' + str(question_id))
 
 

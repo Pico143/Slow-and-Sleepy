@@ -149,6 +149,18 @@ def vote_reputation_for_answers(answer_id, vote):
             break
 
 
+def vote_reputation_for_accepted_answer(answer_id):
+    users_and_answers = persistence.get_all_answers_and_users()
+    for user in users_and_answers:
+        if int(user['answer_id']) == int(answer_id):
+            user['reputation'] = int(user['reputation']) + 15
+            persistence.update_reputation(user)
+            break
+
+
+
+
+
 def register_user(name):
     values = [name, str(datetime.now().replace(microsecond=0))]
     persistence.add_user_to_db(values)
