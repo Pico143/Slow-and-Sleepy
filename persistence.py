@@ -193,8 +193,7 @@ def add_user_to_db(cursor, values):
 @connection_handler
 def show_all_users(cursor):
     cursor.execute("""SELECT username FROM user_table;""")
-    users = cursor.fetchall()
-    return users
+    return cursor.fetchall()
 
 
 @connection_handler
@@ -203,7 +202,7 @@ def get_all_users_questions(cursor, userID):
     Return value:
     Questions - list of dictionaries with given users questions'''
 
-    query = """SELECT * FROM question WHERE question.user_id = %s"""
+    query = """SELECT * FROM question WHERE question.user_id = %s;"""
     cursor.execute(query, [userID])
     return cursor.fetchall()
 
@@ -216,7 +215,7 @@ def get_all_users_answers(cursor, userID):
 
     query = """SELECT answer.*, question.message AS question FROM answer
                INNER JOIN question ON question.id=answer.question_id 
-               WHERE answer.user_id = %s"""
+               WHERE answer.user_id = %s;"""
     cursor.execute(query, [userID])
     return cursor.fetchall()
 
@@ -272,6 +271,5 @@ def update_reputation(cursor, row):
 
 @connection_handler
 def view_users(cursor):
-    cursor.execute("""SELECT username, registration_time, reputation FROM user_table;""")
-    users = cursor.fetchall()
-    return users
+    cursor.execute("""SELECT * FROM user_table;""")
+    return cursor.fetchall()
