@@ -15,5 +15,10 @@
         <p>
         </p>
         <input type="submit" value="Submit Question" id="submit">
+        <select id="user" name="user">
+            {% for user in user_list %}
+            <option value="{{ user['username'] }}">{{ user['username'] }}</option>
+            {% endfor %}
+        </select>
     </form>
 {% endblock %}

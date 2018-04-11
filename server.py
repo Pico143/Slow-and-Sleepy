@@ -22,7 +22,8 @@ def list_questions():
 
 @app.route('/new-question')
 def new_question():
-    return render_template('ask_question.html')
+    user_list = logic.show_the_users()
+    return render_template('ask_question.html', user_list=user_list)
 
 
 @app.route('/new-question', methods=["POST"])
