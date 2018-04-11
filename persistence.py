@@ -256,7 +256,7 @@ def update_reputation(cursor, row):
     """
     cursor.execute("""
                     UPDATE user_table SET reputation = {0} WHERE id = {1};
-                   """.format(table, row['reputation'], row['user_id']))
+                   """.format(row['reputation'], row['user_id']))
 
 
 @connection_handler
