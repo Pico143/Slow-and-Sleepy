@@ -90,7 +90,23 @@ def vote_question(question_id, vote):
             elif vote is False:
                 question['vote_number'] = int(question['vote_number']) - 1
             persistence.update_question_vote(question)
+            change_reputation_for_questions()
             break
+
+
+
+def change_reputation_for_questions(question_id, vote):
+    users_and_questions = persistence.get_all_questions_and_users()
+    for user in users_and_questions:
+        if int(user['question_id']) == int(question_id):
+            if vote is True:
+                user['reputation'] = int(user['reputation']) + 5
+            elif vote is False:
+                user['reputation'] = int(user['reputation']) - 2
+            persistence.update_reputation(user, 'user_table')
+            break
+
+
 
 
 def get_answer_ids(question_answer):
