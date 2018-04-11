@@ -32,7 +32,7 @@ def search(cursor, query):
     return matching_questions
 
 
-def add_row_to_db(row, table):
+def add_row_to_db(row, table, userID):
     ''' Adds a new row into a given table, provided that dictionary is in a form adjusted to the table
     it's supposed to go to (which is to be done by logic.py functions)
     Row - python dictionary to be added
@@ -40,34 +40,20 @@ def add_row_to_db(row, table):
     connection = open_database()
     cursor = connection.cursor()
     if table == "question":
-        query = "INSERT INTO question (id,message, submission_time,vote_number,user_id,view_number,title) VALUES (%s, %s, %s, %s, %s, %s,%s)"
+        query = "INSERT INTO question (id,message,submission_time,title,view_number,vote_number,user_id) VALUES (%s, %s, %s, %s, %s, %s, %s)"
     elif table == "answer":
-        query = "INSERT INTO answer (id,message,question_id,submission_time,vote_number) VALUES (%s, %s, %s, %s, %s)"
+        query = "INSERT INTO answer (id,message,question_id,submission_time,vote_number,user_id) VALUES (%s, %s, %s, %s, %s, %s)"
     elif table == "comment" and row['answer_id'] == 'null':
-        query = "INSERT INTO comment (answer_id,edited_count,id,message,question_id,submission_time) VALUES (null, %s, %s, %s, %s, %s)"
+        query = "INSERT INTO comment (answer_id,edited_count,id,message,question_id,submission_time,user_id) VALUES (null, %s, %s, %s, %s, %s, %s)"
         del row['answer_id']
     else:
-        query = "INSERT INTO comment (answer_id,edited_count,id,message,question_id,submission_time) VALUES (%s, %s, %s, %s, %s, %s)"
+        query = "INSERT INTO comment (answer_id,edited_count,id,message,question_id,submission_time,user_id) VALUES (%s, %s, %s, %s, %s, %s, %s)"
     values = []
     for key in sorted(row.keys()):
         values.append(str(row[key]))
+    values.append(userID)
     cursor.execute(query, values)
     connection.close()
-
-
-@connection_handler
-def add_question_to_db(cursor, dict):
-    cursor.execute("""
-                        INSERT INTO question
-                        (id,submission_time,view_number,vote_number,user_id,title,message)
-                        VALUES ({0}, '{1}', {2}, {3}, {4}, '{5}', '{6}');
-                       """.format(dict['id'],
-                                   dict['submission_time'],
-                                   dict['view_number'],
-                                   dict['vote_number'],
-                                   dict['user_id'][0]['id'],
-                                   dict['title'],
-                                   dict['message']))
 
 
 def open_database():
