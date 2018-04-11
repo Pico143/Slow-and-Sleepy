@@ -115,6 +115,7 @@ def view_question(question_id=None):
     labels_answer = logic.get_list_of_headers(questions_answer)
     labels_question_comment = logic.get_list_of_headers(question_comment)
     labels_answer_comment = logic.get_list_of_headers(answer_comment)
+    user = persistence.get_user(question[0]['user_id'])
     return render_template('display_question.html',
                            question=question,
                            questions_answer=questions_answer,
@@ -124,7 +125,8 @@ def view_question(question_id=None):
                            question_comment=question_comment,
                            answer_comment=answer_comment,
                            labels_question_comment=labels_question_comment,
-                           labels_answer_comment=labels_answer_comment)
+                           labels_answer_comment=labels_answer_comment,
+                           user=user[0])
 
 
 @app.route('/question/<int:question_id>/vote-up')

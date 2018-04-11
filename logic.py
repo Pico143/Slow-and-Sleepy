@@ -164,3 +164,10 @@ def get_all_questions_answers_comments_and_user(userID):
     comments = persistence.get_all_users_comments(userID)
     user = persistence.get_user(userID)
     return questions, answers, comments, user
+
+
+def get_all_users():
+    return persistence.view_users()
+
+def get_user_by_id(userID):
+    return persistence.get_user(userID)
