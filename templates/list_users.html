@@ -7,15 +7,15 @@
 
     <table class="table">
       <tr>
-          {% for item in labels|sort %}
-              <th>{{ item }}</th>
-          {% endfor %}
+          <th>Username</th>
+          <th>Reputation</th>
+          <th>Registration time</th>
       </tr>
         {% for user in users %}
             <tr>
-              {% for key, value in user.items()|sort %}
-                <td> {{ value }} </td>
-              {% endfor %}
+                <td>{{ user['username'] }}</td>
+                <td>{{ user['reputation'] }}</td>
+                <td>{{ user['registration_time'] }}</td>
             </tr>
         {% endfor %}
 </table>
