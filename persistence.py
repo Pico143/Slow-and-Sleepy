@@ -239,3 +239,39 @@ def get_user(cursor, userID):
     query = """SELECT * FROM user_table WHERE user_table.id = %s"""
     cursor.execute(query, [userID])
     return cursor.fetchall()
+
+@connection_handler
+def get_all_questions_and_users(cursor):
+    cursor.execute("""
+                    SELECT question.id AS question_id, user_table.id AS user_id, reputation  FROM question JOIN user_table ON question.user_id = user_table.id;
+                   """)
+    all_questions_and_users = cursor.fetchall()
+    return all_questions_and_users
+
+
+@connection_handler
+def get_all_answers_and_users(cursor):
+    cursor.execute("""
+                    SELECT answer.id AS answer_id, user_table.id AS user_id, reputation  FROM answer JOIN user_table ON answer.user_id = user_table.id;
+                   """)
+    all_answers_and_users = cursor.fetchall()
+    return all_answers_and_users
+
+
+@connection_handler
+def update_reputation(cursor, row):
+    """
+    :param cursor: psycopg2 cursor (provided by connection handler)
+    :param row: Dictionary with updated row
+    :return:
+    """
+    cursor.execute("""
+                    UPDATE user_table SET reputation = {0} WHERE id = {1};
+                   """.format(row['reputation'], row['user_id']))
+
+
+@connection_handler
+def view_users(cursor):
+    cursor.execute("""SELECT username, registration_time, reputation FROM user_table;""")
+    users = cursor.fetchall()
+    return users
