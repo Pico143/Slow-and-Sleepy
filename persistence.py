@@ -230,6 +230,17 @@ def get_all_users_comments(cursor, userID):
     return cursor.fetchall()
 
 
+@connection_handler
+def update_reputation(cursor, row):
+    """
+    :param cursor: psycopg2 cursor (provided by connection handler)
+    :param row: Dictionary with updated row
+    :return:
+    """
+    cursor.execute("""
+                    UPDATE user_table SET reputation = {0} WHERE id = {1};
+                   """.format(table, row['reputation'], row['user_id']))
+
 
 @connection_handler
 def view_users(cursor):
