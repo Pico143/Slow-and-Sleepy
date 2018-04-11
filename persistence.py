@@ -228,3 +228,11 @@ def get_all_users_comments(cursor, userID):
     query = """SELECT * FROM comments WHERE userID = %s"""
     cursor.execute(query, userID)
     return cursor.fetchall()
+
+
+
+@connection_handler
+def view_users(cursor):
+    cursor.execute("""SELECT username, registration_time, reputation FROM user_table;""")
+    users = cursor.fetchall()
+    return users
