@@ -203,8 +203,8 @@ def get_all_users_questions(cursor, userID):
     Return value:
     Questions - list of dictionaries with given users questions'''
 
-    query = """SELECT * FROM questions WHERE userID = %s"""
-    cursor.execute(query, userID)
+    query = """SELECT * FROM question WHERE question.user_id = %s"""
+    cursor.execute(query, [userID])
     return cursor.fetchall()
 
 
@@ -212,10 +212,12 @@ def get_all_users_questions(cursor, userID):
 def get_all_users_answers(cursor, userID):
     ''' User ID: Integer
     Return value:
-    Answers - list of dictionaries with given users answers'''
+    Answers - list of dictionaries with given users answers and question message'''
 
-    query = """SELECT * FROM answers WHERE userID = %s"""
-    cursor.execute(query, userID)
+    query = """SELECT answer.*, question.message AS question FROM answer
+               INNER JOIN question ON question.id=answer.question_id 
+               WHERE answer.user_id = %s"""
+    cursor.execute(query, [userID])
     return cursor.fetchall()
 
 
@@ -223,8 +225,17 @@ def get_all_users_answers(cursor, userID):
 def get_all_users_comments(cursor, userID):
     ''' User ID: Integer
         Return value:
-        Comments - list of dictionaries with given users comments'''
+        Comments - list of dictionaries with given users comments and relevant question message'''
 
-    query = """SELECT * FROM comments WHERE userID = %s"""
-    cursor.execute(query, userID)
+    query = """SELECT comment.*, question.message AS question FROM comment 
+               INNER JOIN question ON question.id=comment.question_id
+               WHERE comment.user_id = %s"""
+    cursor.execute(query, [userID])
+    return cursor.fetchall()
+
+
+@connection_handler
+def get_user(cursor, userID):
+    query = """SELECT * FROM user_table WHERE user_table.id = %s"""
+    cursor.execute(query, [userID])
     return cursor.fetchall()

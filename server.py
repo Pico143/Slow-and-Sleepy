@@ -172,13 +172,14 @@ def user_registration():
         return redirect('/')
 
 
-@app.route('/user/<user_id>')
+@app.route('/user/<int:user_id>')
 def show_user(user_id=None):
-    questions, answers, comments = logic.get_all_questions_answers_comments(user_id)
+    questions, answers, comments, user = logic.get_all_questions_answers_comments_and_user(user_id)
     return render_template('User_info.html',
                            questions=questions,
                            answers=answers,
-                           comments=comments)
+                           comments=comments,
+                           user=user[0])
 
 
 if __name__ == '__main__':
