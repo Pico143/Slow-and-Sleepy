@@ -239,6 +239,7 @@ def get_user(cursor, userID):
     cursor.execute(query, [userID])
     return cursor.fetchall()
 
+
 @connection_handler
 def get_all_questions_and_users(cursor):
     cursor.execute("""

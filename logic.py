@@ -94,7 +94,6 @@ def vote_question(question_id, vote):
             break
 
 
-
 def change_reputation_for_questions(question_id, vote):
     users_and_questions = persistence.get_all_questions_and_users()
     for user in users_and_questions:
@@ -105,8 +104,6 @@ def change_reputation_for_questions(question_id, vote):
                 user['reputation'] = int(user['reputation']) - 2
             persistence.update_reputation(user)
             break
-
-
 
 
 def get_answer_ids(question_answer):
