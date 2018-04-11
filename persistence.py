@@ -229,6 +229,23 @@ def get_all_users_comments(cursor, userID):
     cursor.execute(query, userID)
     return cursor.fetchall()
 
+@connection_handler
+def get_all_questions_and_users(cursor):
+    cursor.execute("""
+                    SELECT question.id AS question_id, user_table.id AS user_id, reputation  FROM question JOIN user_table ON question.user_id = user_table.id;
+                   """)
+    all_questions_and_users = cursor.fetchall()
+    return all_questions_and_users
+
+
+@connection_handler
+def get_all_answers_and_users(cursor):
+    cursor.execute("""
+                    SELECT answer.id AS answer_id, user_table.id AS user_id, reputation  FROM answer JOIN user_table ON answer.user_id = user_table.id;
+                   """)
+    all_answers_and_users = cursor.fetchall()
+    return all_answers_and_users
+
 
 @connection_handler
 def update_reputation(cursor, row):

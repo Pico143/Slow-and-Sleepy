@@ -90,7 +90,7 @@ def vote_question(question_id, vote):
             elif vote is False:
                 question['vote_number'] = int(question['vote_number']) - 1
             persistence.update_question_vote(question)
-            change_reputation_for_questions()
+            change_reputation_for_questions(question_id, vote)
             break
 
 
