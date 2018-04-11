@@ -181,6 +181,15 @@ def show_user(user_id=None):
                            comments=comments)
 
 
+@app.route('/view_users')
+def view_users():
+    labels=util.US_FIELDS
+    users = persistence.view_users()
+    return render_template('list_users.html', labels=labels, users=users)
+
+
+
+
 if __name__ == '__main__':
     app.secret_key = 'some_key'
     app.run(
