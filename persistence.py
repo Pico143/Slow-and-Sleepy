@@ -40,7 +40,7 @@ def add_row_to_db(row, table):
     connection = open_database()
     cursor = connection.cursor()
     if table == "question":
-        query = "INSERT INTO question (id,message,submission_time,title,view_number,vote_number) VALUES (%s, %s, %s, %s, %s, %s)"
+        query = "INSERT INTO question (id,message, submission_time,vote_number,user_id,view_number,title) VALUES (%s, %s, %s, %s, %s, %s,%s)"
     elif table == "answer":
         query = "INSERT INTO answer (id,message,question_id,submission_time,vote_number) VALUES (%s, %s, %s, %s, %s)"
     elif table == "comment" and row['answer_id'] == 'null':
@@ -53,6 +53,21 @@ def add_row_to_db(row, table):
         values.append(str(row[key]))
     cursor.execute(query, values)
     connection.close()
+
+
+@connection_handler
+def add_question_to_db(cursor, dict):
+    cursor.execute("""
+                        INSERT INTO question
+                        (id,submission_time,view_number,vote_number,user_id,title,message)
+                        VALUES ({0}, '{1}', {2}, {3}, {4}, '{5}', '{6}');
+                       """.format(dict['id'],
+                                   dict['submission_time'],
+                                   dict['view_number'],
+                                   dict['vote_number'],
+                                   dict['user_id'][0]['id'],
+                                   dict['title'],
+                                   dict['message']))
 
 
 def open_database():
@@ -125,6 +140,17 @@ def get_item_by_question_id(cursor, table, _id):
                    """.format(table, _id))
     question = cursor.fetchall()
     return question
+
+
+@connection_handler
+def get_user_id(cursor, username):
+    cursor.execute("""
+                    SELECT id
+                    FROM user_table
+                    WHERE username = '{0}';
+                   """.format(username))
+    user_id = cursor.fetchall()
+    return user_id
 
 
 @connection_handler

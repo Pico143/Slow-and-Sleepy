@@ -28,8 +28,10 @@ def new_question():
 
 @app.route('/new-question', methods=["POST"])
 def submit_question():
-    dict = logic.question_dict(request.form["title"], request.form["question"])
-    persistence.add_row_to_db(dict, "question")
+    user_id = persistence.get_user_id(request.form["username"])
+    dict = logic.question_dict(request.form["title"], request.form["question"], user_id)
+    print(dict)
+    persistence.add_question_to_db(dict)
     return redirect('/list')
 
 

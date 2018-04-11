@@ -26,13 +26,14 @@ def answer_dict(question_id, answer):
     return answer_dict
 
 
-def question_dict(title, question):
-    ['id', 'submission_time', 'view_number', 'vote_number', 'title', 'message', 'image']
+def question_dict(title, question, user_id):
+    ['id', 'submission_time', 'view_number', 'vote_number', 'user_id', 'title', 'message', 'image']
     question_dict = {
         'id': get_id(persistence.get_all_items('question')),
         'submission_time': str(datetime.now().replace(microsecond=0)),
         'view_number': 0,
         'vote_number': 0,
+        'user_id': user_id,
         'title': title,
         'message': question,
     }
