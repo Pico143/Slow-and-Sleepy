@@ -100,8 +100,9 @@ def write_answer(question_id=None):
 
 @app.route('/question/<int:question_id>/new-answer', methods=['POST'])
 def submit_answer(question_id):
+    user_id = persistence.get_user_id(request.form["user"])[0]['id']
     dict = logic.answer_dict(question_id, request.form['answer'])
-    persistence.add_row_to_db(dict, "answer")
+    persistence.add_row_to_db(dict, "answer", user_id)
     return redirect('/question/' + str(question_id))
 
 
