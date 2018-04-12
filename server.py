@@ -44,19 +44,26 @@ def new_question_comment(question_id=None):
                                question_id=question_id,
                                user_list=user_list)
     if request.method == "POST":
+        user_id = persistence.get_user_id(request.form["username"])[0]['id']
         dict = logic.comment_dict(request.form["comment"], question_id=question_id)
-        persistence.add_row_to_db(dict, "comment")
+        persistence.add_row_to_db(dict, "comment", user_id)
         return redirect('/question/' + str(question_id))
 
 
 @app.route('/question/<int:question_id>/answer/<int:answer_id>/new-comment', methods=["GET", "POST"])
 def new_answer_comment(question_id=None, answer_id=None):
     if request.method == "GET":
+        user_list = logic.show_the_users()
         answer = persistence.get_item_by_id("answer", answer_id)
-        return render_template('add_comment.html', answer=answer, answer_id=answer_id, question_id=question_id)
+        return render_template('add_comment.html',
+                               answer=answer,
+                               answer_id=answer_id,
+                               question_id=question_id,
+                               user_list=user_list)
     if request.method == "POST":
+        user_id = persistence.get_user_id(request.form["username"])[0]['id']
         dict = logic.comment_dict(request.form["comment"], answer_id=answer_id, question_id=question_id)
-        persistence.add_row_to_db(dict, "comment")
+        persistence.add_row_to_db(dict, "comment", user_id)
         return redirect('/question/' + str(question_id))
 
 
