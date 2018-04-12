@@ -21,6 +21,11 @@
 <br/>
 <button type="submit" , id="submit_add_comment">{% if question_comment %} Edit comment {% else %} Submit
     comment {% endif %} </button>
+    <select id="username" name="username">
+            {% for user in user_list %}
+                <option value="{{ user['username'] }}">{{ user['username'] }}</option>
+            {% endfor %}
+    </select>
 </form>
 {% set link="/question/" + question_id|string %}
 <form action={{ link }} method='get' name="Back to question" id="Back to question">

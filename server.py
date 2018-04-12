@@ -37,8 +37,12 @@ def submit_question():
 @app.route('/question/<int:question_id>/new-comment', methods=["GET", "POST"])
 def new_question_comment(question_id=None):
     if request.method == "GET":
+        user_list = logic.show_the_users()
         question = persistence.get_item_by_id("question", question_id)
-        return render_template('add_comment.html', question=question, question_id=question_id)
+        return render_template('add_comment.html',
+                               question=question,
+                               question_id=question_id,
+                               user_list=user_list)
     if request.method == "POST":
         dict = logic.comment_dict(request.form["comment"], question_id=question_id)
         persistence.add_row_to_db(dict, "comment")
