@@ -107,7 +107,7 @@
                     {% else %}
                         <td>wooops, seems like this answer has no user assigned</td>
                     {% endif %}
-                    <td>{% if field['accepted'] == none %} Accepted {% else %} Not Accepted {% endif %}</td>
+                    <td>{% if field['accepted'] %} Accepted {% else %} Not Accepted {% endif %}</td>
                     {% set question_id = question_id|int %}
                     {% set answer_id = field['id']|int %}
                     {% set accepted = field['accepted'] %}
@@ -130,7 +130,7 @@
                         {% else %}
                             <form action={{ accept_answer_link }} method='post' name="Accept answer"
                                   id="Accept Answer">
-                                <input type="submit" value="Accept Answer" , id="accept">
+                                <input type="submit" value="Accept Answer" id="accept">
                             </form>
                         {% endif %}
                     </td>
