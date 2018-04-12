@@ -99,7 +99,7 @@
                     <td>{{ field['message'] }}</td>
                     <td>{{ field['submission_time'] }}</td>
                     <td>{{ field['vote_number'] }}</td>
-                    <td>To be implemented (show answering user)</td>
+                    <td><a href={{ url_for('show_user', user_id=field['user_id']) }}>{{ field['username'] }}</td>
                     <td>{% if field['accepted'] == none %} Accepted {% else %} Not Accepted {% endif %}</td>
                     {% set question_id = question_id|int %}
                     {% set answer_id = field['id']|int %}

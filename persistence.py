@@ -90,8 +90,9 @@ def get_all_items(cursor, table):
 @connection_handler
 def get_item_by_foreign_key(cursor, table, _id, foreign_key):
     cursor.execute("""
-                    SELECT *
+                    SELECT {0}.*, user_table.username
                     FROM {0}
+                    LEFT JOIN user_table ON user_table.id={0}.user_id
                     WHERE {2} = {1};
                    """.format(table, _id, foreign_key))
     question = cursor.fetchall()
