@@ -15,7 +15,7 @@
         <p>
         </p>
         <input type="submit" value="Submit Question" id="submit">
-        <select id="username" name="username">
+        <select id="username" name="username" required>
             {% for user in user_list %}
                 <option value="{{ user['username'] }}">{{ user['username'] }}</option>
             {% endfor %}
