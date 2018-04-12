@@ -56,9 +56,12 @@
                         <td>
                             {{ submission_time }}
                         </td>
-                        <td>
-                            To be implemented (show commenting user)
-                        </td>
+                        {% if comment['user_id'] is not none %}
+                            <td><a href={{ url_for('show_user', user_id=comment['user_id']) }}>{{ comment['username'] }}
+                            </td>
+                        {% else %}
+                            <td>wooops, seems like this answer has no user assigned</td>
+                        {% endif %}
                         <td>
                             {% if comment['edited_count'] %} {{ comment['edited_count'] }}
                             {% else %} 0
@@ -99,10 +102,10 @@
                     <td>{{ field['message'] }}</td>
                     <td>{{ field['submission_time'] }}</td>
                     <td>{{ field['vote_number'] }}</td>
-                    {% if field['user_id'] is not none  %}
+                    {% if field['user_id'] is not none %}
                         <td><a href={{ url_for('show_user', user_id=field['user_id']) }}>{{ field['username'] }}</td>
                     {% else %}
-                        <td>wooops, seems like this answer has no user</td>
+                        <td>wooops, seems like this answer has no user assigned</td>
                     {% endif %}
                     <td>{% if field['accepted'] == none %} Accepted {% else %} Not Accepted {% endif %}</td>
                     {% set question_id = question_id|int %}
